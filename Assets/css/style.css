@@ -1,0 +1,10 @@
+body {
+    background-image: url("../Images/1.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.mensajealerta{
+color:red;
+}
