@@ -1,21 +1,40 @@
 <?php 
 session_start();
 
+function getBaseUrl() 
+{
+    // output: /myproject/index.php
+    $currentPath = $_SERVER['PHP_SELF']; 
+    
+    // output: Array ( [dirname] => /myproject [basename] => index.php [extension] => php [filename] => index ) 
+    $pathInfo = pathinfo($currentPath); 
+    
+    // output: localhost
+    $hostName = $_SERVER['HTTP_HOST']; 
+    
+    // output: http://
+    $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,5))=='https://'?'https://':'http://';
+    
+    // return: http://localhost/myproject/
+    return $protocol.$hostName.$pathInfo['dirname']."/";
+}
 
-/*
 if(empty($_SESSION['nombre_usuario'])){
   header("Location:index.php");
-}*/
+}
 if(isset($_POST['btncerrarsession'])){
   session_destroy();
+  header("Location:index.php");
 }
+
+
 ?>
 <html>
 <head>
-<link rel="stylesheet" href="./Assets/css/bootstrap.min.css"/>
-<link rel="stylesheet" href="./Assets/css/style.css"/>
-<script type="text/javascript" src="./Assets/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="./Assets/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="<?php echo getBaseUrl();?>Assets/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="<?php echo getBaseUrl();?>Assets/css/style.css"/>
+<script type="text/javascript" src="<?php echo getBaseUrl();?>Assets/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="<?php echo getBaseUrl();?>Assets/js/bootstrap.min.js"></script>
 
 
 </head>
@@ -31,13 +50,13 @@ if(isset($_POST['btncerrarsession'])){
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administrar Usuario <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="./Registrar.php">Registrar Nuevo Usuario</a></li>
+            <li><a href="./Registrar">Registrar Nuevo Usuario</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="./Listausuarios.php">Lista De usuarios</a></li>
+            <li><a href="./Listausuarios">Lista De usuarios</a></li>
           </ul>
           <?php }?>
-              <li><a href="./LibrosDisponible.php">Libros Disponible</a></li>
-               <li><a href="./Upload.php">Subir Libros</a></li>
+              <li><a href="./LibrosDisponible">Libros Disponible</a></li>
+               <li><a href="./Upload">Subir Libros</a></li>
            
    </li>
   

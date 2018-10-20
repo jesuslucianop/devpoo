@@ -1,23 +1,25 @@
 <?php
 
-class Libros extends Autores {
+class Libros  {
 
-private $id=0;
+private $id=4;
 
 private $titulo = "";
+private $archivo = "";
 
 private $cantidad_pagina=0;
+private $id_autores = 0;
 
-private $url;
+private $url= "";
 
     function __construct()
     {
-        echo $this->id;
+    
+
+   //     echo $this->id;
 
     }
-    function __toString(){
-        return "Soy libro";
-    }
+
     function __get($prop)
     {
         if(isset($this->$prop))
@@ -44,8 +46,40 @@ private $url;
         $datos[] = $fila;
     }
         return $datos;
+    }
+    function SubirLibro()
+    {
+        $titulo = $this->titulo;// Titulo Del Libro
+        $cantidad_paginas = $this->cantidad_pagina;
 
+        $autores = $this->id_autores;
+        $name = $this->archivo['file']['name']; //nombre de la imagen
+        $name = str_replace(" ", "_", $name);
+        $tmp = $this->archivo['file']['tmp_name']; // nombre temporal de la imagen
+        $num = rand(0,999999);
+        $fecha = date("dmY");
+       $upfile = $fecha."_".$num."_".$name; //nuevo nombre de la imagen
+       $destiny = "./Repositorio/";
+       $url = $destiny."/".$upfile;
+     
+        echo $this->archivo['file']['name'];
+        $sql = "INSERT INTO GBH.libro (Titulo,Id_autores, Cant_pag, url)VALUES('".$titulo."','".$autores."','".$cantidad_paginas."','".$url."') ";
+        $result = mysqli_query(Conexion::obj(),$sql);
+        move_uploaded_file($tmp, $destiny . $upfile);
+  
 
     }
+    function DescargarLibroPDf()
+     {
+        $ruta = getBaseUrl()."Repositorio/";
+        header('Content-type: application/pdf');
+        // It will be called downloaded.pdf
+        header('Content-Disposition: attachment; filename="'.$this->titulo.'.pdf"');
+        
+        // The PDF source is in original.pdf
+        readfile($ruta);
+    
+    }  
+    //Funcion para buscar dentro de la carpeta si existe un txt con los libros exportados a txt 
+    }
 
-}

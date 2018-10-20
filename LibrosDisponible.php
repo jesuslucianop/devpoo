@@ -1,9 +1,60 @@
 <?php
 include "Header.php";
 include "./Clases/Motor.php";
+$directorio = './tmp';
+$ficheros1  = scandir($directorio);
+
+$data = array();
+function buscar($dir,&$archivo_buscar) 
+{   // Funcion Recursiva 
+    // Autor DeeRme 
+    // http://deerme.org 
+     if ( is_dir($dir) ) 
+     { 
+          // Recorremos Directorio 
+          $d=opendir($dir);  
+          while( $archivo = readdir($d) ) 
+          { 
+            if ( $archivo!="." AND $archivo!=".."  ) 
+            { 
+                  
+                 if ( is_file($dir.'/'.$archivo) ) 
+                 { 
+                      // Es Archivo 
+                      if ( $archivo == $archivo_buscar  ) 
+                      { 
+                           return ($dir.'/'.$archivo); 
+                    } 
+                     
+                } 
+                  
+                if ( is_dir($dir.'/'.$archivo) ) 
+                { 
+                     // Es Directorio 
+                     // Volvemos a llamar 
+                     $r=buscar($dir.'/'.$archivo,$archivo_buscar); 
+                     if ( basename($r) == $archivo_buscar ) 
+                     { 
+                          return $r; 
+                    } 
+                      
+                      
+                } 
+                   
+                   
+                 
+                  
+                  
+            } 
+                   
+        } 
+                   
+    } 
+    return FALSE; 
+} 
 
 
-
+$ruta2 = getBaseUrl();
 ?>
 <div class="row">
 <table class="table table-bordered">
@@ -20,10 +71,9 @@ include "./Clases/Motor.php";
   <tbody>
     <tr>
     <?php 
-    $fila= Libros::MostrarLibros();
 
+$fila= Libros::MostrarLibros();
     foreach($fila as $row){
-
       $fila_autores = Autores::FiltroTabla($row->id);
 
       echo "<tr>
@@ -31,39 +81,36 @@ include "./Clases/Motor.php";
       <td>{$row->id}</td>
       <td>{$row->titulo}</td>
       ";
+      echo "<td>";
       foreach($fila_autores as $fl){
-      echo "<td>{$fl->Nombre}</td>";
+    
+      echo $fl->Nombre;
     }
-echo "
-      <td>{$row->cant_pag}</td>
-      
-      <td>  <a href=http://localhost/dev/Libreria/Clases/Prueba.php?btndescargarpdf=1&id=".$row->url."&nombre=",urlencode($row->titulo )," class='btn btn-primary'>Descargar</a></td>
-      <td><a href=http://localhost/dev/Libreria/Clases/Prueba.php?dte=1&id=".$row->id." class='btn btn-primary dte'>Descargar txt Exportado</a>
-      <button type='button' class='btn btn-danger'>Exportar html</button></td>
-      </tr>";
+    echo "</td>";
 
-    }
-    /*
-foreach($rows3 as $row2)
-{
-    //$resultautores = $conexion ->query("Select Nombre from Autores where Id_autores ='".$row2['id_autores'] ."' ");
-    //$rowautores = $resultautores->fetch_array();
-
-    echo "<tr>";
-    echo "<td>" . $row2['id'] . "</td>";
-    echo "<td>" . $row2['titulo'] . "</td>";
-   // echo "<td>" . $rowautores['Nombre'] . "</td>";
-    echo "<td>" . $row2['cant_pag'] . "</td>";
+    echo "<td>{$row->cant_pag}</td>";    
+    
     echo "<td>" 
     ."
-    <a href=http://localhost/dev/Libreria/Clases/Prueba.php?btndescargarpdf=1&id=".$row2['url']."&nombre=",urlencode($row2['titulo'] )," class='btn btn-primary'>Descargar</a>
-    <button type='button' class='btn btn-warning btntext' id='etexto' url='".$row2['url']."'  urlid='".$row2['id']."' >Exportar texto</button>
-    <a href=http://localhost/dev/Libreria/Clases/Prueba.php?dte=1&id=".$row2['id']." class='btn btn-primary dte'>Descargar txt Exportado</a>
-    <button type='button' class='btn btn-danger'>Exportar html</button>
-    "."</td>";
+      <form method='GET' action=''>
+        <a href={$ruta2}prueba.php?btndescargarpdf=1&id=".$row->url."&nombre=",urlencode($row->titulo )," class='btn btn-primary'>Descargar</a>
+        <a href={$ruta2}prueba.php?etexto=1&url=".$row->url."&id=",$row->id ," class='btn btn-warning btntext' id='etexto' url='".$row->url."'  urlid='".$row->id."' >Exportar texto</a>
+ 
+     
+    ";
+    //$clase =new ManejoArchivo();
+    //$clase->archivo = $row->id;
+    $archivo = $row->id."pdf";
+    $ruta = getcwd ();
+    $clase = buscar($ruta.'/tmp/',$archivo); ;
+   
+      echo "<a href={$ruta2}Prueba.php?dte=1&id=".$row->id." class='btn btn-primary dte'>Descargar txt Exportado</a>";
+    
+    echo"</td>";
+         
+    echo  "</form>";
+    }
 
-
-}*/
 ?>
     </tr>
   </tbody>
@@ -71,5 +118,6 @@ foreach($rows3 as $row2)
 
 </div>
 <?php
+
 include "Footer.php";
 ?>

@@ -5,3 +5,4 @@ include "Conexion.php";
 include "Usuarios.php";
 include "Autores.php";
 include "Libros.php";
+include "ManejoArchivo.php";

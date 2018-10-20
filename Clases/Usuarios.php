@@ -41,7 +41,9 @@ class Usuarios
                 $fila = mysqli_fetch_array($row);
                 $_SESSION['nombre_usuario'] = $fila['nombre'];
                 $_SESSION['Rol_usuario'] = $fila['Rol'];
-                header("Location:http://localhost/invento/dashboard.php");
+                
+                //var_dump($_SERVER);
+                header("Location:./dashboard");
                 //echo $_SESSION['nombre_usuario'];
                 //echo $_SESSION['Rol_usuario'];
             }else{

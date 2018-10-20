@@ -5,6 +5,11 @@ body {
     -o-background-size: cover;
     background-size: cover;
 }
+
 .mensajealerta{
 color:red;
+}
+.table{
+
+    background-color:white;
 }

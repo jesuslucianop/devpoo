@@ -4,12 +4,12 @@ class Autores
 {
 private $id = 0;
 private $Nombre = "";
-private $Nacionalidad = "";
+
 
     function __construct()
     {
     
-        $this->id = 89;
+      
     }
     function __get($prop)
     {
@@ -52,4 +52,11 @@ private $Nacionalidad = "";
             }
             return $datos;
     }
+
+    function AgregarAutor(){
+
+        $consulta = "INSERT INTO GBH.Autores( Nombre)VALUES( '".$this->Nombre."')";
+        
+        $rs= mysqli_query(Conexion::obj(),$consulta);
+        }
 }

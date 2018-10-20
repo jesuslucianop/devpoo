@@ -1,0 +1,12 @@
+
+# Activar RewriteEngine
+RewriteEngine on
+ RewriteBase /invento
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+# Reescribir la URL solicitada por el usuario
+#   Entrada:  clientes/NOMBRE/
+#   Salida: clientes.php?id=NOMBRE
+#RewriteRule ^(\w+)/?$ dashboard.php?id=$1
+#RewriteRule ^(.*)/?$ dashboard.php?id=$1
+RewriteRule ^(.*)$ $1.php
