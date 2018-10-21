@@ -105,7 +105,7 @@ $fila= Libros::MostrarLibros();
     $clase = buscar($ruta.'/tmp/',$archivo); ;
    
       echo "<a href={$ruta2}Prueba.php?dte=1&id=".$row->id." class='btn btn-primary dte'>Descargar txt Exportado</a>";
-    
+    echo "<a href={$ruta2}Ebook/{$row->url}/2 class='btn btn-warning btntext' id='etexto' url='".$row->url."'  urlid='".$row->id."' >Ver Libro</a>";
     echo"</td>";
          
     echo  "</form>";

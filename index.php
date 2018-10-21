@@ -11,7 +11,10 @@ if($u->login()=="false"){
 }
 
 }
-
+session_Start();
+if(isset($_SESSION['nombre_usuario'])){
+    header("Location:./Dashboard");
+}
 ?>
 <html>
 <head>
