@@ -11,9 +11,15 @@ $pdf    = $parser->parseFile($_GET['id']);
  
 $text = $pdf->getText();
 
-echo $_GET['id'];
-echo $_GET['con'];
-echo "<h3>".$text."</h3>";
+//echo $_GET['id'];
+//echo $_GET['con'];
+$pages  = $pdf->getPages();
+ 
+// Loop over each page to extract text.
+foreach ($pages as $page) {
+    echo "<h4>".$page->getText()."<br/>\n"."</h4>";
+}
+//echo "<h3>".$text."</h3>";
  }
 ?>
 
