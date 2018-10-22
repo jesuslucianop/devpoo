@@ -14,6 +14,7 @@ RewriteCond %{SCRIPT_FILENAME} !-f
 #RewriteRule ^(.*)$ $1.php
 #RewriteRule ^Ebook/?$ VistaHtml.php
 RewriteRule ^Dashboard/?$ Dashboard.php
+RewriteRule ^index/?$ index.php
 RewriteRule ^Registrar/?$ Registrar.php
 RewriteRule ^Listausuarios/?$ Listausuarios.php
 RewriteRule ^LibrosDisponible/?$ LibrosDisponible.php

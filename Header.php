@@ -20,11 +20,11 @@ function getBaseUrl()
 }
 
 if(empty($_SESSION['nombre_usuario'])){
-  header("Location:index.php");
+  header("Location:./index");
 }
 if(isset($_POST['btncerrarsession'])){
   session_destroy();
-  header("Location:index.php");
+  header("Location:./index");
 }
 
 
@@ -43,7 +43,7 @@ if(isset($_POST['btncerrarsession'])){
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Api Bibliotecaria</a>
+      <a class="navbar-brand" href="./Dashboard">Api Bibliotecaria</a>
     </div>
     <ul class="nav navbar-nav">
    <?php if($_SESSION['Rol_usuario'] == 1){?>
