@@ -1,6 +1,6 @@
 /*
 SQLyog Enterprise - MySQL GUI v8.05 
-MySQL - 5.5.5-10.1.19-MariaDB : Database - gbh
+MySQL - 5.5.5-10.1.34-MariaDB : Database - gbh
 *********************************************************************
 */
 
@@ -27,7 +27,11 @@ CREATE TABLE `autores` (
 
 /*Data for the table `autores` */
 
+LOCK TABLES `autores` WRITE;
+
 insert  into `autores`(`Id_autores`,`Nombre`) values (1,'Paulo Coelho'),(2,'Nicolas Maquiavelo'),(3,'nicolas de ovando'),(4,'algurismi'),(5,'Hipatias'),(6,'w3 school'),(7,'Microsoft'),(8,'Pablo neruda'),(9,'Pablo neruda'),(10,'leonardo dicaprio');
+
+UNLOCK TABLES;
 
 /*Table structure for table `libro` */
 
@@ -39,12 +43,17 @@ CREATE TABLE `libro` (
   `id_autores` int(25) DEFAULT NULL,
   `cant_pag` int(30) DEFAULT NULL,
   `url` text,
+  `Nombre_del_archivo` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `libro` */
 
-insert  into `libro`(`id`,`titulo`,`id_autores`,`cant_pag`,`url`) values (1,'los alpesitos',1,2,'./Repositorio/20082018_524870_Product-Backlog.pdf'),(2,'los alpes ',2,345,'./Repositorio//20082018_555735_Product-Backlog.pdf'),(3,'El principito',2,588,'./Repositorio//22082018_5809_EULA.pdf'),(4,'Html5',6,2,'./Repositorio//24082018_946385_HTML5_draft.pdf'),(5,'El principe',2,158,'./Repositorio//24082018_742150_El_príncipe.pdf'),(6,'Scrum book',6,25,'./Repositorio//24082018_125447_Scrum-Master.pdf'),(7,'Libro de asp',7,800,'./Repositorio//28082018_741088_Professional_ASP.NET_MVC_5.pdf'),(8,'La pablada del arroyo',3,542,'./Repositorio//11102018_184631_620-1159-1-PB.pdf');
+LOCK TABLES `libro` WRITE;
+
+insert  into `libro`(`id`,`titulo`,`id_autores`,`cant_pag`,`url`,`Nombre_del_archivo`) values (1,'El principito',7,34,'./Repositorio//20102018_27549_Scrum-Master.pdf',NULL),(2,'Pablo escobar el patron del mal',6,258,'./Repositorio//21102018_181086_Que-es-un-canal-de-distribuciÃ³n.pdf',NULL),(3,'Mvc',7,258,'./Repositorio//21102018_293177_2017-Scrum-Guide-Spanish-SouthAmerican.pdf','21102018_293177_2017-Scrum-Guide-Spanish-Sout');
+
+UNLOCK TABLES;
 
 /*Table structure for table `libros` */
 
@@ -61,7 +70,11 @@ CREATE TABLE `libros` (
 
 /*Data for the table `libros` */
 
+LOCK TABLES `libros` WRITE;
+
 insert  into `libros`(`id_libro`,`Titulo`,`Id_autores`,`Cant_pag`,`url`) values (1,'jesus','2','4','./Repositorio/18082018_927188_Sprint-Backlog.'),(2,'jesus','2','4','./Repositorio/18082018_927188_Sprint-Backlog.'),(3,'jesus','2','4','./Repositorio/18082018_927188_Sprint-Backlog.');
+
+UNLOCK TABLES;
 
 /*Table structure for table `usuarios` */
 
@@ -74,11 +87,15 @@ CREATE TABLE `usuarios` (
   `password` varchar(25) NOT NULL,
   `Rol` varchar(20) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 /*Data for the table `usuarios` */
 
-insert  into `usuarios`(`Id`,`nombre`,`usuario`,`password`,`Rol`) values (1,'jesus luciano','jluciano','admin123','1'),(2,'Jorge de jesus bello','jbello','123','2'),(4,'anthony nova perez','anova','123','2'),(8,'Elian soto (el sotico)','lagger','admin12345','1'),(10,'David luciano','dluciano','123','2'),(11,'samuel','speralta','123','3'),(12,'carolina','cguerrero','12345','2'),(13,'niel ','nvasquez','123','3'),(14,'pablo','ppaulino','123','3');
+LOCK TABLES `usuarios` WRITE;
+
+insert  into `usuarios`(`Id`,`nombre`,`usuario`,`password`,`Rol`) values (1,'jesus luciano','jluciano','admin123','1'),(2,'Jorge de jesus bello','jbello','123','2'),(4,'anthony nova perez','anova','123','2'),(8,'Elian soto (el sotico)','lagger','admin12345','1'),(10,'David luciano','dluciano','123','2'),(11,'samuel','speralta','123','3'),(12,'carolina','cguerrero','12345','2'),(13,'niel ','nvasquez','123','3'),(14,'pablo','ppaulino','123','3'),(15,'Guillermo cano','gcano','123','3');
+
+UNLOCK TABLES;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

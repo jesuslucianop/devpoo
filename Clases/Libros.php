@@ -62,7 +62,7 @@ private $url= "";
        $destiny = "./Repositorio/";
        $url = $destiny."/".$upfile;
      
-        echo $this->archivo['file']['name'];
+        //echo $this->archivo['file']['name'];
         $sql = "INSERT INTO GBH.libro (Titulo,Id_autores, Cant_pag, url,Nombre_del_archivo)VALUES('".$titulo."','".$autores."','".$cantidad_paginas."','".$url."','".$upfile."') ";
         $result = mysqli_query(Conexion::obj(),$sql);
         move_uploaded_file($tmp, $destiny . $upfile);
